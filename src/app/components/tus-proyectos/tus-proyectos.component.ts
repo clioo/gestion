@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
 @Component({
   selector: 'app-tus-proyectos',
   templateUrl: './tus-proyectos.component.html',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TusProyectosComponent implements OnInit {
   constructor() { }
-
+  opened = true;
   ngOnInit() {
   }
-
+  mode = new FormControl('push');
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
 }

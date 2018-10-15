@@ -8,10 +8,6 @@ html,body{
     background: linear-gradient(to bottom, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 );
 }
-footer{
-    background: white;
-    height: 100%;
-}
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
@@ -38,3 +34,5 @@ footer{
 .fadeIn {
     animation-name: fadeIn;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }

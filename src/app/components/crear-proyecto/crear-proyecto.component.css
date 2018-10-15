@@ -33,7 +33,7 @@ form{
 /* // Large devices (desktops, 992px and up) */
 @media (max-width: 992px) { 
     .container{
-        height: 70%;
+        height: 50%;
     }
 
 }

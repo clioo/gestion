@@ -23,6 +23,14 @@ import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyec
 import { TusProyectosComponent } from './components/tus-proyectos/tus-proyectos.component';
 import { UnirseProyectoComponent } from './components/unirse-proyecto/unirse-proyecto.component';
 import { CuentaComponent } from './components/cuenta/cuenta.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//angular material
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -36,13 +44,18 @@ import { CuentaComponent } from './components/cuenta/cuenta.component';
     CrearProyectoComponent,
     TusProyectosComponent,
     UnirseProyectoComponent,
-    CuentaComponent
+    CuentaComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    MatSidenavModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    BrowserAnimationsModule,
+    MatRadioModule
   ],
   providers: [
     AuthService,
