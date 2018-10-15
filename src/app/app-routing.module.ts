@@ -1,0 +1,40 @@
+import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+
+//componentes
+import { HomeComponent } from './components/home/home.component';
+import { PreciosComponent } from './components/precios/precios.component';
+import { ProtegidaComponent } from './components/protegida/protegida.component';
+import { UnirseProyectoComponent } from './components/unirse-proyecto/unirse-proyecto.component';
+import { TusProyectosComponent } from './components/tus-proyectos/tus-proyectos.component';
+import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyecto.component';
+import { CuentaComponent } from './components/cuenta/cuenta.component';
+import { CallbackComponent } from './components/callback/callback.component';
+
+
+import { AuthguardService } from './services/authguard.service';
+
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'precios', component: PreciosComponent },
+  { path: 'unirse', component: UnirseProyectoComponent, canActivate:[AuthguardService] },
+  { path: 'tus-proyectos', component: TusProyectosComponent, canActivate:[AuthguardService] },
+  { path: 'crear-proyecto', component: CrearProyectoComponent, canActivate:[AuthguardService] },
+  { path: 'cuenta', component: CuentaComponent, canActivate:[AuthguardService] },
+  { path: 'callback', component: CallbackComponent},
+  { path: 'protegida', component: ProtegidaComponent, canActivate:[AuthguardService] },
+  { path: '**', component: HomeComponent },
+
+  //{ path: 'path/:routeParam', component: MyComponent },
+  //{ path: 'staticPath', component: ... },
+  //{ path: '**', component: ... },
+  //{ path: 'oldPath', redirectTo: '/staticPath' },
+  //{ path: ..., component: ..., data: { message: 'Custom' }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
