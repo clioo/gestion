@@ -1,6 +1,6 @@
 .mat-sidenav-container{
     background: transparent;
-    height: 91%;
+    height: 90%;
 
 }
 .sidenav-bar{
@@ -10,6 +10,14 @@
 }
 .btn-link{
     color: #ffffff;
+}
+.container{
+    -webkit-box-shadow: -5px 3px 58px 8px rgba(0,0,0,0.8);
+    -moz-box-shadow: -5px 3px 58px 8px rgba(0,0,0,0.8);
+    box-shadow: -5px 3px 58px 8px rgba(0,0,0,0.8);
+    height: 90%;
+    align-items: center;
+    overflow-y: scroll;
 }
 
 
@@ -25,6 +33,15 @@
     .sidenav-bar{
         width: 40%;
     }
+    .container{
+        -webkit-box-shadow: -5px 3px 58px 8px rgba(0,0,0,0.8);
+        -moz-box-shadow: -5px 3px 58px 8px rgba(0,0,0,0.8);
+        box-shadow: -5px 3px 58px 8px rgba(0,0,0,0.8);
+        height: 90%;
+        align-items: center;
+        overflow-y: scroll;
+    }
+    
     
 }
 
@@ -40,6 +57,13 @@
     .sidenav-bar{
         width: 35%;
     }
+    .container{
+        height: 90%;
+        margin-top: 0% !important;
+        -webkit-box-shadow: -5px 3px 58px 8px transparent;
+        -moz-box-shadow: -5px 3px 58px 8px transparent;
+        box-shadow: -5px 3px 58px 8px transparent;
+    }
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -47,11 +71,21 @@
     .sidenav-bar{
         width: 30%;
     }
+    .container{
+        height: 90%;
+    }
 }
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {    
     .sidenav-bar{
-        width: 40%;
+        width: 60%;
+    }
+    .container{
+        height: 100%;
+        margin-top: 0% !important;
+        -webkit-box-shadow: -5px 3px 58px 8px transparent;
+        -moz-box-shadow: -5px 3px 58px 8px transparent;
+        box-shadow: -5px 3px 58px 8px transparent;
     }
 }

@@ -15,17 +15,35 @@
 			<button class="btn btn-link" mat-button (click)="sidenav.toggle(); opened = false;"><i class="fas fa-times"></i></button>
 		</div>
 		<br>
-		<button class="btn btn-light btn-block" ><i class="fas fa-comments"></i> Inbox</button>
-		<button class="btn btn-light btn-block"><i class="fas fa-calendar-alt"></i> Tareas</button>
-		<button class="btn btn-light btn-block"><i class="fas fa-users"></i> Tu equipo</button>
+		<button (click)="tab=1;" class="btn btn-light btn-block" ><i class="fas fa-comments"></i> Inbox</button>
+		<button (click)="tab=2;" class="btn btn-light btn-block"><i class="fas fa-calendar-alt"></i> Tareas</button>
+		<button (click)="tab=3;" class="btn btn-light btn-block"><i class="fas fa-users"></i> Tu equipo</button>
 		<!-- AQUI SI EL USUARIO ES DUEÑO DEL PROYECTO O LIDER PUEDE ASIGNAR TAREA -->
-		<button class="btn btn-light btn-block"><i class="fas fa-tasks"></i> Asignar tarea</button>
+		<button (click)="tab=4;" class="btn btn-light btn-block"><i class="fas fa-tasks"></i> Asignar tarea</button>
+		<button (click)="tab=5;" class="btn btn-light btn-block"><i class="fas fa-cog"></i> Configuraciones</button>
 	</mat-sidenav>
   
 	<mat-sidenav-content>
 	  <button *ngIf="!opened" (click)="opened = true;" class="btn btn-light ml-2" mat-button (click)="sidenav.toggle()"><i class="fas fa-bars"></i></button>
-		<div class="container-fluid">
-			
+
+		<div class="container">
+			<span [ngSwitch]="tab">
+			<div *ngSwitchCase="1">
+				1
+			</div>
+			<div *ngSwitchCase="2">
+				2
+			</div>
+			<div *ngSwitchCase="3">
+				3
+			</div>
+			<div *ngSwitchCase="4">
+					4
+			</div>
+			<div *ngSwitchCase="5">
+					5
+			</div>
+			</span>
 		</div>
 	</mat-sidenav-content>
   </mat-sidenav-container>

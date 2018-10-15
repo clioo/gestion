@@ -29,7 +29,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
-import { FooterComponent } from './components/footer/footer.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 @NgModule({
@@ -44,18 +46,19 @@ import { FooterComponent } from './components/footer/footer.component';
     CrearProyectoComponent,
     TusProyectosComponent,
     UnirseProyectoComponent,
-    CuentaComponent,
-    FooterComponent
+    CuentaComponent
   ],
   imports: [
     BrowserModule,
-    MatSidenavModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSidenavModule,
     MatCheckboxModule,
-    BrowserAnimationsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     AuthService,
