@@ -16,9 +16,9 @@ export class CuentaComponent implements OnInit {
     } else {
       this._authService.getProfile((err, profile) => {
         this.profile = profile;
+        console.log(profile);
       });
     }
-    console.log(this.profile);
   }
 
 }

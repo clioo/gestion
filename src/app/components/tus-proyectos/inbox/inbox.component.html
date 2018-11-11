@@ -1,0 +1,23 @@
+<h1>Inbox</h1>
+<hr>
+
+<div class="container main-container">
+  <div class="chat-window">
+      <div class="app-mensajes" id="app-mensajes">
+            <div *ngFor="let chat of _chatservice.chats" class="text-right">
+              <span class="badge badge-primary">Fernando</span>
+              <p>
+                {{chat.mensaje}}
+              </p>
+            </div>
+
+          
+          </div>
+          <input type="text" name="mensaje" (keyup.enter)="enviarMensaje()" [(ngModel)]="mensaje" id=""
+          placeholder="Enviar mensaje">
+    </div>
+
+</div>
+  
+
+
