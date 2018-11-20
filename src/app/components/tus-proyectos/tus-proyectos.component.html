@@ -10,7 +10,7 @@
 						<select #selectProyectos id="selectProyectos" (change)="cambiarTipo(selectProyectos.value)" class="ml-3 custom-select">
 								<option value="0">--Seleccione un proyecto--</option>
 								<option *ngFor="let proyecto of proyectos; let i of index;" 
-								[value]="proyecto.id">{{proyecto.data.titulo}}</option>
+								[value]="proyecto.id">{{proyecto.titulo}}</option>
 							  </select>
 					</div>
 	

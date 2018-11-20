@@ -1,11 +1,42 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 }) 
 export class FirestoreFirebaseService {
   private itemsCollection: AngularFirestoreCollection<any>;
-  constructor(private afs: AngularFirestore) { }
+
+  private prueba = new Array();
+
+  constructor(private afs: AngularFirestore) { 
+    // this.itemsCollection = afs.collection('proyectos');
+    // this.itemsCollection.snapshotChanges()
+    // .pipe(
+    //   map(actions => actions.map(a => {
+    //     const data = a.payload.doc.data();
+    //     const id = a.payload.doc.id;
+    //     return { id, data };
+    //   }))).subscribe(data=>{
+    //     data.forEach(dato => {
+    //       this.itemsCollection = afs.collection('proyectos').doc(dato.id)
+    //       .collection('roles', ref => ref.where('usuario', '==','facebook|2478787485496082' ));
+    //       this.itemsCollection.valueChanges().subscribe(data=>{
+    //         this.prueba.push({
+    //           id:dato.id,
+    //           titulo:dato.data.titulo
+    //         })
+    //       });
+    //     });
+    //     console.log(this.prueba)
+    //   })
+    }
+
+  obtenerProyectosDeUsuario(){
+
+  }
+
   //valuechanges obtiene los datos a la vista, bueno para mostrar en html
   obtenerDatosValueChanges(coleccion:string){
     return this.afs.collection<any>(coleccion).valueChanges();

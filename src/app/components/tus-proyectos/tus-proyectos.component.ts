@@ -23,7 +23,7 @@ export class TusProyectosComponent implements OnInit {
   @Input() proyectoEscogido:string = '0';
   proyectosCargados = true;
   proyectosUsuario:any;
-  proyectos:any;
+  proyectos = new Array();
   @Input() idUsuarioAdmin:string;
   cambiarTipo(value:any){
     this.router.navigateByUrl('/tus-proyectos', {skipLocationChange: true}).then(()=>
@@ -62,14 +62,33 @@ export class TusProyectosComponent implements OnInit {
 }
 
 cargarProyectos(){
-  this.afs.collection('proyectos', ref => ref.where('usuario', '==',this.profile.sub ))
+  this.afs.collection('proyectos')
       .snapshotChanges().pipe(
         map(actions => actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
           return { id, data };
-        }))).subscribe(data => {
-          this.proyectos = data;
+        })))
+        .subscribe(data => {
+          //********PROYECTOS */
+          //, ref => ref.where('usuario', '==',this.profile.sub )
+          data.forEach((dato:any) => {
+            this.itemsCollection = this.afs.collection('proyectos').doc(dato.id)
+            .collection('roles', ref => ref.where('usuario', '==',this.profile.sub ));
+            this.itemsCollection.valueChanges().subscribe((data:any)=>{
+              data.forEach(dato2 => {
+                this.proyectos.push({
+                  id:dato.id,
+                  titulo:dato.data.titulo
+                })              });
+
+            });
+          });
+
+
+
+
+          //********PROYECTOS */
           this.proyectosCargados = false;
           setTimeout(() => {
             this.activatedRoute.params.subscribe(params=>{

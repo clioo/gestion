@@ -26,14 +26,12 @@ export class UnirseProyectoLinkComponent implements OnInit {
   }
   updateColection(){
     this.activatedRoute.params.subscribe(params=>{
-      console.log(params)
       this._fsService.updateDocumentoEnColeccionDeProyecto(
         params['idProyecto'], 'roles', params['idRol'],
         {
           usuario:this.profile.sub
         }
       ).then(data=>{
-        console.log('Todo correcto');
       }).catch(err=>console.log(err));
     })
   }
