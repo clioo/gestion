@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RealtimeFirebaseService } from '../../../services/realtime-firebase.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tu-equipo',
@@ -6,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tu-equipo.component.css']
 })
 export class TuEquipoComponent implements OnInit {
-
-  constructor() { }
+  usuarios: Observable<any[]>;
+  constructor(private af:RealtimeFirebaseService) { 
+    af.getUsuarios().subscribe((data:any)=>this.usuarios = data);
+    }
 
   ngOnInit() {
   }

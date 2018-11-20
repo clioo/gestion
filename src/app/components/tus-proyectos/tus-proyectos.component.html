@@ -1,34 +1,39 @@
-<mat-sidenav-container class="mat-sidenav-container">
+<div *ngIf="proyectosCargados"  class="container">
+        <app-app-loading></app-app-loading>
+</div>
+
+<mat-sidenav-container *ngIf="!proyectosCargados" class="animated fadeIn mat-sidenav-container">
 	<mat-sidenav class="sidenav-bar" mode="side" #sidenav [opened]="opened">
 		<div class="row justify-content-between">
 				<!-- AQUI DEBE MOSTRAR TODOS LOS PROYECTOS A LOS QUE PERTENECE -->
 				<div class="dropdown">
-						<button type="button" class="ml-3 btn btn-light btn-block dropdown-toggle" data-toggle="dropdown">
-								<i class="fas fa-project-diagram"></i> Proyecto 1
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Proyecto 2</a>
-							<a class="dropdown-item" href="#">Proyecto 3</a>
-						</div>
+						<select #selectProyectos id="selectProyectos" (change)="cambiarTipo(selectProyectos.value)" class="ml-3 custom-select">
+								<option value="0">--Seleccione un proyecto--</option>
+								<option *ngFor="let proyecto of proyectos; let i of index;" 
+								[value]="proyecto.id">{{proyecto.data.titulo}}</option>
+							  </select>
 					</div>
 	
 			<button class="btn btn-link" mat-button (click)="sidenav.toggle(); opened = false;"><i class="fas fa-times"></i></button>
 		</div>
 		<br>
-		<button (click)="tab=1;" class="btn btn-light btn-block" ><i class="fas fa-comments"></i> Inbox</button>
-		<button (click)="tab=2;" class="btn btn-light btn-block"><i class="fas fa-calendar-alt"></i> Tareas</button>
-		<button (click)="tab=3;" class="btn btn-light btn-block"><i class="fas fa-users"></i> Tu equipo</button>
+		<button (click)="tab=0;" class="btn btn-light btn-block" ><i class="fas fa-home"></i> Home</button>
+		<button *ngIf="this.proyectoEscogido != '0'" (click)="tab=1;" class="btn btn-light btn-block" ><i class="fas fa-comments"></i> Inbox</button>
+		<button *ngIf="this.proyectoEscogido != '0'" (click)="tab=2;" class="animated fadeIn btn btn-light btn-block"><i class="fas fa-calendar-alt"></i> Tareas</button>
+		<button *ngIf="this.proyectoEscogido != '0'" (click)="tab=3;" class="animated fadeIn btn btn-light btn-block"><i class="fas fa-users"></i> Tu equipo</button>
 		<!-- AQUI SI EL USUARIO ES DUEÑO DEL PROYECTO O LIDER PUEDE ASIGNAR TAREA -->
-		<button (click)="tab=4;" class="btn btn-light btn-block"><i class="fas fa-tasks"></i> Asignar tarea</button>
-		<button (click)="tab=5;" class="btn btn-light btn-block"><i class="fas fa-cog"></i> Configuraciones</button>
+		<button *ngIf="this.proyectoEscogido != '0'" (click)="tab=4;" class="animated fadeIn btn btn-light btn-block"><i class="fas fa-tasks"></i> Asignar rol</button>
+		<button *ngIf="this.proyectoEscogido != '0'" (click)="tab=5;" class="animated fadeIn btn btn-light btn-block"><i class="fas fa-cog"></i> Configuraciones</button>
 	</mat-sidenav>
   
 	<mat-sidenav-content>
 		<button *ngIf="!opened" (click)="opened = true;" class="btn btn-dark mt-2 ml-2" mat-button (click)="sidenav.toggle()"><i class="fas fa-bars"></i></button>
 		<div class="container">
 				<span [ngSwitch]="tab">
+				<div *ngSwitchCase="0">
+					<app-home-proyectos></app-home-proyectos>	
+				</div>
 				<div *ngSwitchCase="1">
-					<h3 class="text-center"> <i class="fas fa-comment"></i> Inbox</h3>
 					<app-inbox></app-inbox>
 				</div>
 				 <div *ngSwitchCase="2"> <!--CALENDARIO DE ACTIVIDADES -->
@@ -41,7 +46,7 @@
 				</div>
 				<div *ngSwitchCase="4">
 					<h3 class="text-center"> <i class="fas fa-tasks"></i> Asignar Tarea</h3>
-					<app-asignar-tarea></app-asignar-tarea>
+					<app-asignar-rol></app-asignar-rol>
 				</div>
 				<div *ngSwitchCase="5">
 					<h3 class="text-center"> <i class="fas fa-cog"></i> Configrar proyecto</h3>
@@ -51,6 +56,3 @@
 		</div>
 	</mat-sidenav-content>
   </mat-sidenav-container>
-  
-  
-  

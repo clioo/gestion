@@ -1,11 +1,12 @@
 <div class="card-columns animated fadeIn">
-  <div class="card">
-    <img class="card-img-top" src="https://png2.kisspng.com/20180508/ozq/kisspng-user-computer-icons-system-chinese-wind-title-column-5af1427fd3ab48.378455571525760639867.png"
+  <div *ngFor="let usuario of usuarios" class="card">
+    <img class="card-img-top" [src]="usuario.identity.picture"
       alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title justify-content-center d-flex">USUARIO</h5>
-      <div class="justify-content-center d-flex">
-        <button class="btn btn-outline-primary btn-sm">Ver actividad</button>
+      <h5 class="card-title justify-content-center d-flex">{{usuario.identity.name}}</h5>
+      <div class="justify-content-center">
+        <button class="btn btn-outline-primary btn-sm"><i class="fas fa-tasks"></i> Ver actividad</button>
+        <button class="btn btn-primary btn-sm mt-1"><i class="fas fa-plus"></i> Asignar tarea</button>
       </div>
     </div>
   </div>

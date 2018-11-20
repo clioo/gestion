@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'precios', component: PreciosComponent },
   { path: 'unirse', component: UnirseProyectoComponent, canActivate:[AuthguardService] },
   { path: 'tus-proyectos', component: TusProyectosComponent, canActivate:[AuthguardService] },
+  { path: 'tus-proyectos/:idProyecto', component: TusProyectosComponent, canActivate:[AuthguardService] },
   { path: 'crear-proyecto', component: CrearProyectoComponent, canActivate:[AuthguardService] },
   { path: 'cuenta', component: CuentaComponent, canActivate:[AuthguardService] },
   { path: 'callback', component: CallbackComponent},

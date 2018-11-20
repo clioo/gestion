@@ -13,13 +13,13 @@
     width: 300px;
     height: 400px;
     overflow: hidden;
-    border: 1px solid #4080FF;
+    border: 1px solid black;
     border-radius: 20px;
   }
   
   .app-mensajes{
     overflow-y:scroll;
-    height:270px;
+    height:340px;
     /*background:gray;*/
     padding: 5px;
   }

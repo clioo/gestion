@@ -1,29 +1,91 @@
-<div class="container mt-5">
-  <form [formGroup]="form" (ngSubmit)="guardar()" class="pt-3" action="" method="post">
+<app-app-loading *ngIf="guardado"></app-app-loading>
+
+<div class="container mt-5" *ngIf="!guardado">
+
+  <form [formGroup]="form" class="pt-3" action="" method="post">
+    <h2 class="text-center">Crea tu proyecto</h2>
+    <hr>
     <div class="form-group justify-content-center">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-8">
                 <label for="titulo" class="label-default">*Título del proyecto</label>
-                <input class="form-control border-dark" type="text"
+                <input  required class="form-control border-dark" type="text"
                 formControlName="titulo" name="titulo" id="titulo">
               </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-8 col-lg-8">
             <label for="descripcion" class="label-default">*Descripción general</label>
-            <textarea formControlName="descripcion"
-            maxlength="100" class="form-control border-dark" name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+            <textarea required formControlName="descripcion"
+            maxlength="100" class="form-control border-dark" 
+            name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
           </div>
         </div>
     </div>
 
-      <div class="form-group row justify-content-center">
-        <label class="col-1 col-form-label">&nbsp;</label>
-        <div class="input-group col-md-8 justify-content-center">
-          <button type="submit" class="btn btn-outline-primary">
-            Crear
-          </button>
-        </div>
+    
+    <h3 class="text-center">Roles</h3>
+    <div class="row justify-content-center">
+        <table class="col-sm-12 col-md-8 col-lg-8 table table-bordered table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rol of roles;let i = index" >
+                <td>{{i}}</td>
+                <td>{{rol.nombre}}</td>
+                <td>
+                  <div class="row justify-content-center">
+                      <button class="btn btn-danger" (click)="eliminarRol(i)">Eliminar <i class="fas fa-times"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+
+
+
+      <div class="row justify-content-center">
+          <button  data-toggle="modal" data-target="#exampleModal" class="mr-2 mb-2 btn  btn-dark"><i class="fas fa-2x fa-plus-circle"></i></button>
+        <button (click)="guardar()" class="mb-2 btn btn-primary">
+          <i class="fas fa-2x fa-check"></i>
+        </button>
       </div>
   </form>
 </div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Añadir rol</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+              <div class="col-sm-12 col-md-8 col-lg-8">
+                <label for="titulo" class="label-default">*Rol</label>
+                <input [(ngModel)]="rol"  #idRol id="idRol" class="form-control border-dark" type="text">
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" *ngIf="rol"
+          (click)="agregarRol(idRol.value)" data-dismiss="modal"><i class="fas fa-plus"></i> Añadir</button>
+        </div>
+      </div>
+    </div>
+  </div>

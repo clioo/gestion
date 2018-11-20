@@ -6,7 +6,6 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthguardService implements CanActivate {
-
   constructor(public _authService:AuthService) { }
   canActivate(next:ActivatedRouteSnapshot, state:RouterStateSnapshot){
     if (!this._authService.isAuthenticated()) {

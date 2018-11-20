@@ -17,7 +17,7 @@ export class AuthService {
     redirectUri: 'http://localhost:4200/callback',
     scope: 'openid profile'
   });
-  userProfile: any;
+  public userProfile: any;
   public getProfile(cb): void {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
