@@ -62,6 +62,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { HomeProyectosComponent } from './components/tus-proyectos/home-proyectos/home-proyectos.component';
 import { UsuarioPipe } from './pipes/usuario.pipe';
+import { UnirseProyectoLinkComponent } from './components/unirse-proyecto-link/unirse-proyecto-link.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +83,8 @@ import { UsuarioPipe } from './pipes/usuario.pipe';
     InboxComponent,
     AsignarTareaModal,
     HomeProyectosComponent,
-    UsuarioPipe
+    UsuarioPipe,
+    UnirseProyectoLinkComponent
   ],
   entryComponents:[AsignarTareaModal],
   imports: [

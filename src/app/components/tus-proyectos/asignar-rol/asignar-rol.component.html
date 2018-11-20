@@ -5,16 +5,16 @@
       <tr>
         <th scope="col">Rol</th>
         <th scope="col">Usuario</th>
-        <th scope="col">Acciones</th>
+        <th *ngIf="idAdmin == idUsuario" scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let rol of roles">
-        <td>{{rol.nombre}}</td>
-        <td>{{rol.usuario | usuario:usuarios}}</td>
-        <td>
-          <button  mat-raised-button (click)="openDialog('David')" class="m-1 btn btn-primary btn-sm"><i class="fas fa-plus"> Asignar</i></button>
-          <button class="m-1 btn btn-danger btn-sm"><i class="fas fa-times-circle"> Expulsar</i></button>
+        <td>{{rol.data.nombre}}</td>
+        <td>{{rol.data.usuario | usuario:usuarios}}</td>
+        <td *ngIf="idAdmin == idUsuario">
+          <button *ngIf="!rol.data.usuario && rol.data.nombre != 'Administrador'" mat-raised-button (click)="openDialog(rol.id)" class="m-1 btn btn-primary btn-sm"><i class="fas fa-plus"> Asignar</i></button>
+          <button *ngIf="rol.data.usuario && rol.data.nombre != 'Administrador'" class="m-1 btn btn-danger btn-sm"><i class="fas fa-times-circle"> Expulsar</i></button>
         </td>
       </tr>
     </tbody>

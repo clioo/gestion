@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { TusProyectosComponent } from '../tus-proyectos.component';
-
+import { map } from 'rxjs/operators';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { FirestoreFirebaseService } from '../../../services/firestore-firebase.service';
@@ -8,8 +8,8 @@ import { RealtimeFirebaseService } from '../../../services/realtime-firebase.ser
 
 
 export interface DialogData {
-  animal: string;
-  name: string;
+  idProyecto: string;
+  idRol: string;
 }
 @Component({
   selector: 'app-asignar-rol',
@@ -26,7 +26,12 @@ export class AsignarRolComponent implements OnInit {
   rolesCargados:boolean = false;
   constructor(private _fbService:RealtimeFirebaseService, public dialog: MatDialog,_afs:FirestoreFirebaseService, @Inject(TusProyectosComponent) public app:TusProyectosComponent) {
     
-    _afs.obtenerColeccionDeDocumento('proyectos',app.proyectoEscogido,'roles').subscribe(data=>{
+    _afs.obtenerColeccionDeDocumento('proyectos',app.proyectoEscogido,'roles').pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, data };
+      }))).subscribe(data=>{
       this.idUsuario = app.profile.sub;
       this.idAdmin  = app.idUsuarioAdmin;
       this.roles = data;
@@ -41,15 +46,12 @@ export class AsignarRolComponent implements OnInit {
       })
 
    }
-  openDialog(nombre="raul"): void {
+  openDialog(idRol): void {
     const dialogRef = this.dialog.open(AsignarTareaModal, {
-      width: '70%',
-      height:'60%',
-      data: {name: nombre, animal: this.animal}
+      data: {idRol: idRol, idProyecto: this.app.proyectoEscogido}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.animal = result;
     });
   }

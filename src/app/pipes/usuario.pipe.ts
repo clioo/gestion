@@ -9,13 +9,12 @@ export class UsuarioPipe implements PipeTransform {
 
   transform(value: any, usuarios:any[]): any {
     if (value) {
-      console.log(usuarios.find(value));
-        usuarios.forEach(usuario => {
-          if (usuario.identity.user_id == value) {
-            console.log(usuario.identity.name);
-            return 'sadsad'; 
+        for (let i = 0; i < usuarios.length; i++) {
+          if (usuarios[i].identity.user_id == value) {
+            return usuarios[i].identity.name; 
           }
-        });
+        }
+
        }else{
       return 'Sin asignar';
     }

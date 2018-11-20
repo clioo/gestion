@@ -10,6 +10,8 @@ import { TusProyectosComponent } from './components/tus-proyectos/tus-proyectos.
 import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyecto.component';
 import { CuentaComponent } from './components/cuenta/cuenta.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { UnirseProyectoLinkComponent } from './components/unirse-proyecto-link/unirse-proyecto-link.component';
+
 
 
 import { AuthguardService } from './services/authguard.service';
@@ -19,6 +21,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'precios', component: PreciosComponent },
   { path: 'unirse', component: UnirseProyectoComponent, canActivate:[AuthguardService] },
+  { path: 'unirse/:idProyecto/:idRol', component: UnirseProyectoLinkComponent, canActivate:[AuthguardService] },
   { path: 'tus-proyectos', component: TusProyectosComponent, canActivate:[AuthguardService] },
   { path: 'tus-proyectos/:idProyecto', component: TusProyectosComponent, canActivate:[AuthguardService] },
   { path: 'crear-proyecto', component: CrearProyectoComponent, canActivate:[AuthguardService] },

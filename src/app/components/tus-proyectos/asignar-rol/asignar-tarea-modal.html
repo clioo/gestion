@@ -1,15 +1,11 @@
-<h1 mat-dialog-title>Asignar a {{data.name}}</h1>
-<div mat-dialog-content>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <div class="form-control">
-            <label for="descripcion">Descripcion de la tarea</label>
-            <textarea class="form-control" name="descripcion" id="descripcion" cols="2w0" rows="8"></textarea>
-        </div>
+<h1 mat-dialog-title>Copia el link y envíalo al integrante de tu equipo</h1>
+<mat-dialog-content class="mat-typography">
+    <input type="text" readonly="true" class="form-control" [value]="'localhost:4200/unirse/' +
+    data.idProyecto + '/' + data.idRol">
+        
 
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>

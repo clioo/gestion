@@ -38,6 +38,12 @@ export class FirestoreFirebaseService {
   }
   obtenerColeccionDeDocumento(nombreColeccion:string,idDocumento:string, nombreColeccionDocumento){
     this.itemsCollection = this.afs.collection<any>(nombreColeccion).doc(idDocumento).collection(nombreColeccionDocumento);
-    return this.itemsCollection.valueChanges();
+    return this.itemsCollection.snapshotChanges();
+  }
+  updateDocumentoEnColeccionDeProyecto(idDocumento:string,nombreColeccionDocumento:string,idDocumentoEnColeccion:string,data:any){
+    this.itemsCollection = this.afs.collection<any>('proyectos').doc(idDocumento).collection(nombreColeccionDocumento);
+
+    return this.itemsCollection.doc(idDocumentoEnColeccion).update(data);
+
   }
 }

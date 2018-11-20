@@ -7,7 +7,6 @@ import { AuthService } from '../../services/auth.service';
 import { FirestoreFirebaseService } from '../../services/firestore-firebase.service';
 
 import { map } from 'rxjs/operators';
-import { InboxComponent } from './inbox/inbox.component';
 
 
 
@@ -81,10 +80,16 @@ cargarProyectos(){
                 this.proyectoEscogido = String(params['idProyecto']);
                 this.selectProyectos.nativeElement.value = String(params['idProyecto'])
                 
-                this._fsService.obtenerColeccionDeDocumento('proyectos',this.proyectoEscogido,'roles').subscribe(data=>{
+                this._fsService.obtenerColeccionDeDocumento('proyectos',this.proyectoEscogido,'roles').pipe(
+                  map(actions => actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return { id, data };
+                  })))
+                .subscribe((data:any)=>{
                   data.forEach(dato => {
-                    if (dato.nombre == 'Administrador') {
-                      this.idUsuarioAdmin = String(dato.usuario);
+                    if (dato.data.nombre == 'Administrador') {
+                      this.idUsuarioAdmin = String(dato.data.usuario); 
                     }
                   });
                 })  
