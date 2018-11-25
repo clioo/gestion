@@ -1,15 +1,26 @@
-<h1 mat-dialog-title>Asignar a {{data.name}}</h1>
-<div mat-dialog-content>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <div class="form-control">
-            <label for="descripcion">Descripcion de la tarea</label>
-            <textarea class="form-control" name="descripcion" id="descripcion" cols="2w0" rows="8"></textarea>
-        </div>
-
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+<h1 mat-dialog-title>{{data.data.title}}</h1>
+<mat-dialog-content class="mat-typography">
+    <hr>
+    <div class="row justify-content-center" [ngSwitch]="estado">
+        <span class="badge badge-success"
+        *ngSwitchCase="'a'">Terminado</span>
+        <span class="badge badge-warning"
+        *ngSwitchCase="'b'">En proceso</span>
+        <span class="badge badge-danger"
+        *ngSwitchCase="'c'">Sin empezar</span>
+    </div>
+    <hr>
+    <div class="dropdown">
+        <select #selectEstado id="selectEstado" (change)="cambioStatus()" class="ml-3 custom-select">
+            <option value="estado">--Estado en el que se encuentra la tarea--</option>
+            <option value="a">Terminado</option>
+            <option value="b">En proceso</option>
+            <option value="c">Sin empezar</option>
+        </select>
+    </div>
+    <br>
+    <p>{{data.data.descripcion}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-danger mr-2" mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

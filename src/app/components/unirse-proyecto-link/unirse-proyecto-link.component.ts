@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreFirebaseService } from '../../services/firestore-firebase.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 
@@ -11,7 +11,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UnirseProyectoLinkComponent implements OnInit {
   profile:any;
-  constructor(private _authService:AuthService, private activatedRoute:ActivatedRoute, private _fsService:FirestoreFirebaseService) { }
+  unido:boolean = false;
+  constructor(private router:Router, private _authService:AuthService, private activatedRoute:ActivatedRoute, private _fsService:FirestoreFirebaseService) { }
 
   ngOnInit() {
     if (this._authService.userProfile) {
@@ -32,6 +33,7 @@ export class UnirseProyectoLinkComponent implements OnInit {
           usuario:this.profile.sub
         }
       ).then(data=>{
+        this.router.navigate(['/tus-proyectos'])
       }).catch(err=>console.log(err));
     })
   }

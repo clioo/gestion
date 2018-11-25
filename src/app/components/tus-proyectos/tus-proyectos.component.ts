@@ -21,12 +21,13 @@ export class TusProyectosComponent implements OnInit {
   profile:any;
   //*************PROYECTOS****************************** 
   @Input() proyectoEscogido:string = '0';
+  @Input() datosProyectoEscogido:any;
   proyectosCargados = true;
   proyectosUsuario:any;
-  proyectos = new Array();
+  @Input() proyectos = new Array();
   @Input() idUsuarioAdmin:string;
   cambiarTipo(value:any){
-    this.router.navigateByUrl('/tus-proyectos', {skipLocationChange: true}).then(()=>
+    this.router.navigateByUrl('/tus-proyectos', {skipLocationChange: false}).then(()=>
       this.router.navigate(['/tus-proyectos', value])); 
   }
   //****************************************************
@@ -35,7 +36,7 @@ export class TusProyectosComponent implements OnInit {
 
   private itemsCollection:AngularFirestoreCollection;
   constructor(private activatedRoute:ActivatedRoute, private router:Router ,private afs:AngularFirestore,private _authService:AuthService, private _fsService:FirestoreFirebaseService) { 
-
+  
 
     
   }
@@ -50,8 +51,9 @@ export class TusProyectosComponent implements OnInit {
         this.profile = profile;
         this.cargarProyectos();
       });
-    }
 
+
+    }
     
 
 
@@ -77,9 +79,17 @@ cargarProyectos(){
             .collection('roles', ref => ref.where('usuario', '==',this.profile.sub ));
             this.itemsCollection.valueChanges().subscribe((data:any)=>{
               data.forEach(dato2 => {
+                if (dato.id == this.proyectoEscogido) {
+                  this.datosProyectoEscogido = {
+                    id:dato.id,
+                    titulo:dato.data.titulo,
+                    descripcion:dato.data.descripcion
+                  }
+                }
                 this.proyectos.push({
                   id:dato.id,
-                  titulo:dato.data.titulo
+                  titulo:dato.data.titulo,
+                  descripcion:dato.data.descripcion
                 })              });
 
             });
@@ -97,7 +107,10 @@ cargarProyectos(){
                 this.selectProyectos.nativeElement.value = '0';
               }else{
                 this.proyectoEscogido = String(params['idProyecto']);
-                this.selectProyectos.nativeElement.value = String(params['idProyecto'])
+
+                setTimeout(() => {
+                  this.selectProyectos.nativeElement.value = this.proyectoEscogido;
+                }, 500);
                 
                 this._fsService.obtenerColeccionDeDocumento('proyectos',this.proyectoEscogido,'roles').pipe(
                   map(actions => actions.map(a => {
@@ -115,7 +128,7 @@ cargarProyectos(){
 
               }
             })
-          }, 30);
+          }, 50);
         });
 }
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { TusProyectosComponent } from '../tus-proyectos.component';
 
 @Component({
   selector: 'app-home-proyectos',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-proyectos.component.css']
 })
 export class HomeProyectosComponent implements OnInit {
-
-  constructor() { }
+  datosProyecto:any;
+  constructor(@Inject(TusProyectosComponent) public app:TusProyectosComponent) {
+    setTimeout(() => {
+    }, 3000);
+    
+   }
 
   ngOnInit() {
+
+  
   }
 
 }

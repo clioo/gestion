@@ -21,9 +21,9 @@ import { TusProyectosComponent } from './components/tus-proyectos/tus-proyectos.
 import { UnirseProyectoComponent } from './components/unirse-proyecto/unirse-proyecto.component';
 import { CuentaComponent } from './components/cuenta/cuenta.component';
 import { ConfiguracionComponent } from './components/tus-proyectos/configuracion/configuracion.component';
-import { AsignarRolComponent, AsignarTareaModal } from './components/tus-proyectos/asignar-rol/asignar-rol.component';
-import { TuEquipoComponent } from './components/tus-proyectos/tu-equipo/tu-equipo.component';
-import { TareasComponent } from './components/tus-proyectos/tareas/tareas.component';
+import { AsignarRolComponent, AsignarRolModal, AgregarRolModal } from './components/tus-proyectos/asignar-rol/asignar-rol.component';
+import { TuEquipoComponent, AsignarTareaModal } from './components/tus-proyectos/tu-equipo/tu-equipo.component';
+import { TareasComponent, TareasModal } from './components/tus-proyectos/tareas/tareas.component';
 import { InboxComponent } from './components/tus-proyectos/inbox/inbox.component';
 
 //firebase
@@ -63,6 +63,7 @@ import { FullCalendarModule } from 'ng-fullcalendar';
 import { HomeProyectosComponent } from './components/tus-proyectos/home-proyectos/home-proyectos.component';
 import { UsuarioPipe } from './pipes/usuario.pipe';
 import { UnirseProyectoLinkComponent } from './components/unirse-proyecto-link/unirse-proyecto-link.component';
+import { UsuarioFotoPipe } from './pipes/usuario-foto.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,11 +83,19 @@ import { UnirseProyectoLinkComponent } from './components/unirse-proyecto-link/u
     TareasComponent,
     InboxComponent,
     AsignarTareaModal,
+    AsignarRolModal,
+    TareasModal,
+    AgregarRolModal,
     HomeProyectosComponent,
     UsuarioPipe,
-    UnirseProyectoLinkComponent
+    UnirseProyectoLinkComponent,
+    UsuarioFotoPipe
   ],
-  entryComponents:[AsignarTareaModal],
+  entryComponents:[AsignarTareaModal, 
+    AgregarRolModal,
+    AsignarRolModal,
+    TareasModal
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

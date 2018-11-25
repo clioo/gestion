@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Asignar tarea</h1>
+<mat-dialog-content class="mat-typography">
+    <div class="form-group">
+        <label for="nombreRol">*Tiulo</label>
+        <input #tituloTarea type="text" id="tituloTarea" class="form-control">
+        <label for="descripcionTarea">*Descripción</label>
+        <textarea name="" id="descripcionTarea" cols="5" rows="5" class="form-control" #descripcionTarea></textarea>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Fecha de inicio" #fechaInicio id="fechaInicio">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+                <input matInput [matDatepicker]="picker2" placeholder="Fecha límite" #fechaLimite id="fechaLimite">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+    </div>
+    
+        
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-danger mr-2" mat-dialog-close>Cancelar</button>
+  <button class="btn btn-primary" (click)="onNoClick(fechaInicio.value, fechaLimite.value,tituloTarea.value,descripcionTarea.value)" [mat-dialog-close]="true" cdkFocusInitial>Agregar</button>
+</mat-dialog-actions>

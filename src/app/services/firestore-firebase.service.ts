@@ -9,7 +9,7 @@ export class FirestoreFirebaseService {
   private itemsCollection: AngularFirestoreCollection<any>;
 
   private prueba = new Array();
-
+  
   constructor(private afs: AngularFirestore) { 
     // this.itemsCollection = afs.collection('proyectos');
     // this.itemsCollection.snapshotChanges()
@@ -33,10 +33,9 @@ export class FirestoreFirebaseService {
     //   })
     }
 
-  obtenerProyectosDeUsuario(){
 
-  }
 
+    
   //valuechanges obtiene los datos a la vista, bueno para mostrar en html
   obtenerDatosValueChanges(coleccion:string){
     return this.afs.collection<any>(coleccion).valueChanges();
@@ -51,6 +50,34 @@ export class FirestoreFirebaseService {
     this.itemsCollection = this.afs.collection(coleccion);
     return this.itemsCollection.doc(id).valueChanges();
   }
+
+  obtenerRolUsuario(idProyecto:string,usuario:string){
+    let rol:any;
+    this.itemsCollection = this.afs.collection('proyectos').doc(idProyecto).collection('roles', ref => ref.where('usuario', '==',usuario))
+    return this.itemsCollection.snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, data };
+        })))
+  }
+  obtenerTareasDeRol(idProyecto:string,idRol:string){
+    this.itemsCollection = this.afs.collection('proyectos').doc(idProyecto).collection('roles')
+    .doc(idRol).collection('tarea');
+    return this.itemsCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        data.id = a.payload.doc.id;
+        return { data };
+      })))
+
+  }
+  obtenerTareaSingular(idProyecto,idRol,idTarea){
+    this.itemsCollection = this.afs.collection('proyectos').doc(idProyecto).collection('roles').doc(idRol)
+    .collection('tarea');
+    return this.itemsCollection.doc(idTarea).valueChanges();
+  }
+
   agregarRolProyecto(datos:any[],idProyecto:string){
     this.itemsCollection = this.afs.collection('proyectos').doc(idProyecto).collection('roles');
 
@@ -77,4 +104,18 @@ export class FirestoreFirebaseService {
     return this.itemsCollection.doc(idDocumentoEnColeccion).update(data);
 
   }
+  updateEstadoDeTarea(idProyecto,idRol,idTarea,data:any){
+    this.itemsCollection = this.afs.collection<any>('proyectos').doc(idProyecto).collection('roles').doc(idRol).collection('tarea');
+    return this.itemsCollection.doc(idTarea).update(data);
+  }
+  asignarTarea(idProyecto:string,idRol:string,data:any){
+    this.itemsCollection = this.afs.collection('proyectos').doc(idProyecto).collection('roles')
+    .doc(idRol).collection('tarea');
+    this.itemsCollection.add(data).then(()=>{
+      console.log('si jala')
+    }).catch(err=>console.log(err));
+  }
+
+ 
+
 }

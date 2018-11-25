@@ -4,6 +4,9 @@
 
 <mat-sidenav-container *ngIf="!proyectosCargados" class="animated fadeIn mat-sidenav-container">
 	<mat-sidenav class="sidenav-bar" mode="side" #sidenav [opened]="opened">
+		<div class="row justify-content-end">
+			<button class="btn btn-link ml-2" mat-button (click)="sidenav.toggle(); opened = false;"><i class="fas fa-times"></i></button>
+		</div>
 		<div class="row justify-content-between">
 				<!-- AQUI DEBE MOSTRAR TODOS LOS PROYECTOS A LOS QUE PERTENECE -->
 				<div class="dropdown">
@@ -14,8 +17,8 @@
 							  </select>
 					</div>
 	
-			<button class="btn btn-link" mat-button (click)="sidenav.toggle(); opened = false;"><i class="fas fa-times"></i></button>
 		</div>
+		<hr>
 		<br>
 		<button (click)="tab=0;" class="btn btn-light btn-block" ><i class="fas fa-home"></i> Home</button>
 		<button *ngIf="this.proyectoEscogido != '0'" (click)="tab=1;" class="btn btn-light btn-block" ><i class="fas fa-comments"></i> Inbox</button>

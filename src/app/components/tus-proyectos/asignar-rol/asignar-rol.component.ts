@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { TusProyectosComponent } from '../tus-proyectos.component';
 import { map } from 'rxjs/operators';
-
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { FirestoreFirebaseService } from '../../../services/firestore-firebase.service';
 import { RealtimeFirebaseService } from '../../../services/realtime-firebase.service';
@@ -24,8 +23,22 @@ export class AsignarRolComponent implements OnInit {
   idUsuario:string;
   idAdmin:string;
   rolesCargados:boolean = false;
-  constructor(private _fbService:RealtimeFirebaseService, public dialog: MatDialog,_afs:FirestoreFirebaseService, @Inject(TusProyectosComponent) public app:TusProyectosComponent) {
+
+  expulsarUsuario(idRol:any){
+    this._afs.updateDocumentoEnColeccionDeProyecto(
+      this.app.proyectoEscogido, 'roles', idRol,
+      {
+        usuario:''
+      }
+    ).then(data=>{
+      // this.router.navigate(['/tus-proyectos'])
+    }).catch(err=>console.log(err));
+  }
+
+  constructor(private _fbService:RealtimeFirebaseService, public dialog: MatDialog,private _afs:FirestoreFirebaseService, @Inject(TusProyectosComponent) public app:TusProyectosComponent) {
     
+    
+
     _afs.obtenerColeccionDeDocumento('proyectos',app.proyectoEscogido,'roles').pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
@@ -46,8 +59,17 @@ export class AsignarRolComponent implements OnInit {
       })
 
    }
-  openDialog(idRol): void {
-    const dialogRef = this.dialog.open(AsignarTareaModal, {
+
+   modalAgregarRol(idRol:any){
+    const dialogRef = this.dialog.open(AgregarRolModal,{
+      data:{
+        idProyecto:this.app.proyectoEscogido
+      }
+    })
+   }
+
+  modalAsignarRol(idRol:any): void {
+    const dialogRef = this.dialog.open(AsignarRolModal, {
       data: {idRol: idRol, idProyecto: this.app.proyectoEscogido}
     });
 
@@ -62,17 +84,43 @@ export class AsignarRolComponent implements OnInit {
 
 
 @Component({
-  selector: 'asignar-tarea-modal',
+  selector: 'asignar-rol-modal',
   templateUrl: 'asignar-tarea-modal.html',
 })
-export class AsignarTareaModal {
+export class AsignarRolModal {
 
   constructor(
-    public dialogRef: MatDialogRef<AsignarTareaModal>,
+    public dialogRef: MatDialogRef<AsignarRolModal>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+}
+
+
+@Component({
+  selector: 'agregar-rol-modal',
+  templateUrl: 'agregar-rol-modal.html',
+})
+export class AgregarRolModal {
+
+  constructor(
+    public dialogRef: MatDialogRef<any>, private _afs:FirestoreFirebaseService,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(nombreRol:string): void {
+    let arreglo:any[] = [];
+    arreglo.push({
+      nombre:nombreRol,
+      usuario:''
+    })
+
+    if (nombreRol) {
+      this._afs.agregarRolProyecto(arreglo , this.data.idProyecto);  
+    }
+    
   }
 
 }
