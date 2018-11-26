@@ -1,27 +1,36 @@
 <h1 mat-dialog-title>Asignar tarea</h1>
-<mat-dialog-content class="mat-typography">
-    <div class="form-group">
-        <label for="nombreRol">*Tiulo</label>
-        <input #tituloTarea type="text" id="tituloTarea" class="form-control">
-        <label for="descripcionTarea">*Descripción</label>
-        <textarea name="" id="descripcionTarea" cols="5" rows="5" class="form-control" #descripcionTarea></textarea>
-        <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Fecha de inicio" #fechaInicio id="fechaInicio">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+<form (ngSubmit)="onNoClick(forma,fechaInicio.value,fechaLimite.value)" #forma="ngForm">
+    <mat-dialog-content class="mat-typography">
+            <mat-form-field>
+            <input matInput placeholder="Titulo" #titulo ngModel name="titulo"
+            required type="text" id="titulo">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+            <textarea matInput ngModel required placeholder="Descripción"
+            name="descripcion" id="descripcionTarea"  #descripcionTarea></textarea>
           </mat-form-field>
           <br>
-          <mat-form-field>
-                <input matInput [matDatepicker]="picker2" placeholder="Fecha límite" #fechaLimite id="fechaLimite">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
+            <mat-form-field>
+                <input matInput  required readonly name="start" [ngModel]="fechaInicio"
+                 [matDatepicker]="picker" placeholder="Fecha de inicio" #fechaInicio id="fechaInicio">
+                <mat-datepicker-toggle disabled="false" matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker disabled="false" #picker></mat-datepicker>
               </mat-form-field>
-    </div>
-    
-        
+              <br>
+              <mat-form-field>
+                    <input required readonly name="end" [ngModel]="fechaFinal"
+                    matInput [matDatepicker]="picker2" placeholder="Fecha límite" #fechaLimite id="fechaLimite">
+                    <mat-datepicker-toggle matSuffix [for]="picker2" disabled="false"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                  </mat-form-field>
+    </mat-dialog-content>
 
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button class="btn btn-danger mr-2" mat-dialog-close>Cancelar</button>
-  <button class="btn btn-primary" (click)="onNoClick(fechaInicio.value, fechaLimite.value,tituloTarea.value,descripcionTarea.value)" [mat-dialog-close]="true" cdkFocusInitial>Agregar</button>
-</mat-dialog-actions>
+    <mat-dialog-actions align="end">
+        <button class="btn btn-danger mr-2" mat-dialog-close>Cancelar</button>
+        <button type="submit"  class="btn btn-primary">Agregar</button>
+      </mat-dialog-actions>
+
+    </form>
+
+

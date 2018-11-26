@@ -22,7 +22,7 @@ import { UnirseProyectoComponent } from './components/unirse-proyecto/unirse-pro
 import { CuentaComponent } from './components/cuenta/cuenta.component';
 import { ConfiguracionComponent } from './components/tus-proyectos/configuracion/configuracion.component';
 import { AsignarRolComponent, AsignarRolModal, AgregarRolModal } from './components/tus-proyectos/asignar-rol/asignar-rol.component';
-import { TuEquipoComponent, AsignarTareaModal } from './components/tus-proyectos/tu-equipo/tu-equipo.component';
+import { TuEquipoComponent, AsignarTareaModal, VerTareasModal } from './components/tus-proyectos/tu-equipo/tu-equipo.component';
 import { TareasComponent, TareasModal } from './components/tus-proyectos/tareas/tareas.component';
 import { InboxComponent } from './components/tus-proyectos/inbox/inbox.component';
 
@@ -83,6 +83,7 @@ import { UsuarioFotoPipe } from './pipes/usuario-foto.pipe';
     TareasComponent,
     InboxComponent,
     AsignarTareaModal,
+    VerTareasModal,
     AsignarRolModal,
     TareasModal,
     AgregarRolModal,
@@ -94,7 +95,8 @@ import { UsuarioFotoPipe } from './pipes/usuario-foto.pipe';
   entryComponents:[AsignarTareaModal, 
     AgregarRolModal,
     AsignarRolModal,
-    TareasModal
+    TareasModal,
+    VerTareasModal
   ],
   imports: [
     BrowserModule,

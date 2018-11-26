@@ -8,6 +8,11 @@
     overflow-y: scroll;
 }
 
+.ng-invalid.ng-touched:not(form){
+    border:1px solid red !important;
+}
+
+
 form{
     font-family: "Roboto";
     font-weight: 500;

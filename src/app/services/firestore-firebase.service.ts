@@ -77,7 +77,6 @@ export class FirestoreFirebaseService {
     .collection('tarea');
     return this.itemsCollection.doc(idTarea).valueChanges();
   }
-
   agregarRolProyecto(datos:any[],idProyecto:string){
     this.itemsCollection = this.afs.collection('proyectos').doc(idProyecto).collection('roles');
 
@@ -111,10 +110,9 @@ export class FirestoreFirebaseService {
   asignarTarea(idProyecto:string,idRol:string,data:any){
     this.itemsCollection = this.afs.collection('proyectos').doc(idProyecto).collection('roles')
     .doc(idRol).collection('tarea');
-    this.itemsCollection.add(data).then(()=>{
-      console.log('si jala')
-    }).catch(err=>console.log(err));
+    return this.itemsCollection.add(data);
   }
+ 
 
  
 

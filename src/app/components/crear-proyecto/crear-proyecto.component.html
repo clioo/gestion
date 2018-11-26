@@ -2,23 +2,29 @@
 
 <div class="container mt-5" *ngIf="!guardado">
 
-  <form [formGroup]="form" class="pt-3" action="" method="post">
+  <form (submit)="guardar()" [formGroup]="form" class="pt-3 needs-validation" novalidate action="" method="post">
     <h2 class="text-center">Crea tu proyecto</h2>
     <hr>
     <div class="form-group justify-content-center">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-8">
                 <label for="titulo" class="label-default">*Título del proyecto</label>
-                <input  required class="form-control border-dark" type="text"
-                formControlName="titulo" name="titulo" id="titulo">
+                <input required class="form-control border-dark" type="text"
+                formControlName="titulo" name="titulo" id="titulo" #titulo>
+                <div class="form-control-feedback" *ngIf="form.controls?.titulo?.errors?.required == true">
+                  Este campo es requerido
+                </div>
               </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-8 col-lg-8">
             <label for="descripcion" class="label-default">*Descripción general</label>
-            <textarea required formControlName="descripcion"
+            <textarea required formControlName="descripcion" #descripcion
             maxlength="100" class="form-control border-dark" 
             name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+            <div class="form-control-feedback" *ngIf="form.controls?.descripcion?.errors?.required == true">
+                Este campo es requerido
+              </div>
           </div>
         </div>
     </div>
@@ -53,7 +59,7 @@
 
       <div class="row justify-content-center">
           <button  data-toggle="modal" data-target="#exampleModal" class="mr-2 mb-2 btn  btn-dark"><i class="fas fa-2x fa-plus-circle"></i></button>
-        <button (click)="guardar()" class="mb-2 btn btn-primary">
+        <button type="submit" class="mb-2 btn btn-primary">
           <i class="fas fa-2x fa-check"></i>
         </button>
       </div>

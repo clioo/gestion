@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./crear-proyecto.component.css']
 })
 export class CrearProyectoComponent implements OnInit {
-  form:FormGroup;
+  form:any;
   guardado:boolean = false;
   titulo:any;
   descripcion:any;
@@ -40,6 +40,7 @@ export class CrearProyectoComponent implements OnInit {
     var objeto:any = this.form.value;
     objeto.usuario = this.profile.sub;
     objeto.fecha= new Date().getTime();
+    console.log(this.form);
     if (this.form.valid) {
       
       //variable para el app-loading 

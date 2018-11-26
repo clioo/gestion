@@ -1,7 +1,7 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" [routerLink]="['/']">Tuesday</a>
+        <a class="navbar-brand" [routerLink]="['/']"><i class="fas fa-handshake"></i> Tuesday</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -16,9 +16,6 @@
             <li class="nav-item">
                 <a [routerLink]="['/tus-proyectos']" routerLinkActive="active"  class="nav-link js-scroll-trigger"><i class="fas fa-project-diagram"></i>Tus proyectos</a>
               </li>
-              <li class="nav-item">
-                  <a [routerLink]="['/unirse']" routerLinkActive="active"  class="nav-link js-scroll-trigger"><i class="fas fa-handshake"></i>Unirse a un proyecto</a>
-                </li>
   
               <li class="nav-item">
                 <a [routerLink]="['/cuenta']" routerLinkActive="active" class="nav-link js-scroll-trigger" *ngIf="loggeado">

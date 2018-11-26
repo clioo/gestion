@@ -6,7 +6,9 @@
   .puntero{
     cursor: pointer;
   }
-  
+  .spanFecha{
+    font-size: 9px;
+  }
   
   .chat-window{
     padding: 10px;

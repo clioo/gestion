@@ -6,8 +6,15 @@
   <div class="row justify-content-center d-flex">
       <div *ngIf="this.app.proyectoEscogido != '0'" class="chat-window">
           <div class="app-mensajes" #appMensajes id="appMensajes">
-                <div *ngFor="let chat of _chatservice.chats" class="text-right">
-                  <span class="badge badge-primary">{{chat.nombre}}</span>
+                <div *ngFor="let chat of _chatservice.chats" 
+                [ngClass]="{'text-right' : this.usuario.sub == chat.usuario}">
+                  <div class="justify-content-end">
+                      <span class="spanFecha">{{chat.fecha | date:'short'}}</span>
+                      
+                      <span class="badge"
+                      [ngClass]="{'badge-primary': this.usuario.sub == chat.usuario,
+                    'badge-dark': this.usuario.sub != chat.usuario}">{{chat.nombre}}</span>
+                  </div>
                   <p>
                     {{chat.mensaje}}
                   </p>
