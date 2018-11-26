@@ -11,7 +11,7 @@
                 <label for="titulo" class="label-default">*Título del proyecto</label>
                 <input required class="form-control border-dark" type="text"
                 formControlName="titulo" name="titulo" id="titulo" #titulo>
-                <div class="form-control-feedback" *ngIf="form.controls?.titulo?.errors?.required == true">
+                <div class="form-control-feedback rojo" *ngIf="form.controls?.titulo?.errors?.required == true">
                   Este campo es requerido
                 </div>
               </div>
@@ -22,7 +22,7 @@
             <textarea required formControlName="descripcion" #descripcion
             maxlength="100" class="form-control border-dark" 
             name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
-            <div class="form-control-feedback" *ngIf="form.controls?.descripcion?.errors?.required == true">
+            <div class="form-control-feedback rojo" *ngIf="form.controls?.descripcion?.errors?.required == true">
                 Este campo es requerido
               </div>
           </div>

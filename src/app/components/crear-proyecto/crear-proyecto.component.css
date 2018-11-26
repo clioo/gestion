@@ -12,6 +12,9 @@
     border:1px solid red !important;
 }
 
+.rojo{
+    color: red;
+}
 
 form{
     font-family: "Roboto";
