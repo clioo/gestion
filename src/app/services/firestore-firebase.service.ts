@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { map, finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 }) 
 export class FirestoreFirebaseService {
   private itemsCollection: AngularFirestoreCollection<any>;
-
+  private angularFireStorageReference:AngularFireStorageReference;
+  private angularFireUploadTask:AngularFireUploadTask;
   private prueba = new Array();
   
-  constructor(private afs: AngularFirestore) { 
+  constructor(private afs: AngularFirestore, private _afStorage:AngularFireStorage) { 
     // this.itemsCollection = afs.collection('proyectos');
     // this.itemsCollection.snapshotChanges()
     // .pipe(
@@ -50,6 +53,36 @@ export class FirestoreFirebaseService {
     this.itemsCollection = this.afs.collection(coleccion);
     return this.itemsCollection.doc(id).valueChanges();
   }
+
+
+
+
+
+
+
+
+  subirArchivo(event, idProyecto, idRol, idTarea){
+    const file = event.target.files[0];
+    const filePath = idProyecto + '-' + idRol + '-' + idTarea + '.zip';
+    const fileRef = this._afStorage.ref(filePath);
+    const task = this._afStorage.upload(filePath, file);
+    let uploadPercent: Observable<number> =  task.percentageChanges();
+    let objeto = {
+      porcentaje:uploadPercent,
+      linkDescarga:fileRef.getDownloadURL()
+    };
+    return objeto;
+
+  
+  }
+
+
+
+
+
+
+
+
 
   obtenerRolUsuario(idProyecto:string,usuario:string){
     let rol:any;

@@ -58,6 +58,8 @@ export class TuEquipoComponent implements OnInit {
         data:{
           idProyecto:this.app.proyectoEscogido,
           idUsuario:idUsuario,
+          idUsuarioLoggeado:this.app.profile.sub,
+          idUsuarioAdmin:this.app.idUsuarioAdmin,
           idRol:idRol,
           usuarios:this.usuarios
         }
@@ -91,6 +93,7 @@ export class AsignarTareaModal {
         idRol: this.data.idRol,
         descripcion:forma.controls.descripcion.value,
         estado:'c', //a = terminado, b=en curso, c= sin empezar
+        entrega:'',
         start:start,
         end:end
       }
@@ -117,7 +120,11 @@ export class VerTareasModal {
         this.tareas = data;
       })
     }
-
+    aceptarEntregas(idTarea){
+      this._afs.updateEstadoDeTarea(this.data.idProyecto,this.data.idRol,idTarea,{
+        estado:'a'
+      })
+    }
     onNoClick(forma:any,start,end): void {
  
 

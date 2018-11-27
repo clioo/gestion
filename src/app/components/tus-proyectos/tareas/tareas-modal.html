@@ -5,21 +5,27 @@
         <span class="badge badge-success"
         *ngSwitchCase="'a'">Terminado</span>
         <span class="badge badge-warning"
-        *ngSwitchCase="'b'">En proceso</span>
+        *ngSwitchCase="'b'">En proceso de ser aceptado</span>
         <span class="badge badge-danger"
         *ngSwitchCase="'c'">Sin empezar</span>
     </div>
     <hr>
-    <div class="dropdown">
+    <!-- <div class="dropdown">
         <select #selectEstado id="selectEstado" (change)="cambioStatus()" class="ml-3 custom-select">
             <option value="estado">--Estado en el que se encuentra la tarea--</option>
             <option value="a">Terminado</option>
             <option value="b">En proceso</option>
             <option value="c">Sin empezar</option>
         </select>
+    </div> -->
+    <div *ngIf="estado != 'a'">
+        <h3>Sube un archcivo de avances(solo zip y rar)</h3>
+        <mat-progress-bar mode="determinate" [value]="procentajeSubida"></mat-progress-bar>
+        <input class="form-control" type="file" (change)="subirArchivo($event)" accept=".zip,.rar" />
+        <br>
+        
     </div>
-    <br>
-    <p>{{data.data.descripcion}}</p>
+    <strong>{{data.data.descripcion}}</strong>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button class="btn btn-danger mr-2" mat-dialog-close>Cancelar</button>

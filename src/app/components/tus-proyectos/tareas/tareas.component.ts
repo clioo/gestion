@@ -75,10 +75,10 @@ export class TareasComponent implements OnInit {
  
   }
 
-  cargarCalendario(){
-    
-    
-  }
+ 
+
+
+
 
   //abrir modal
   openDialog(): void {
@@ -100,16 +100,31 @@ export class TareasComponent implements OnInit {
 export class TareasModal {
   @ViewChild('selectEstado') selectEstado:ElementRef;
   estado;
-  constructor(
-    public dialogRef: MatDialogRef<TareasModal>,
-    @Inject(MAT_DIALOG_DATA) public data:any, private _afs:FirestoreFirebaseService) {
+  procentajeSubida;
+  constructor(public dialogRef: MatDialogRef<TareasModal>, @Inject(MAT_DIALOG_DATA) public data:any, public _afs:FirestoreFirebaseService) 
+    {
       _afs.obtenerTareaSingular(data.idProyecto,data.idRol,data.data.id).subscribe((data:any)=>{
         console.log(data)
         this.estado = data.estado;
       });
       this.estado = data.data.estado;
     }
-
+    subirArchivo(event){
+      let respuesta = this._afs.subirArchivo(event, this.data.idProyecto, this.data.idRol, this.data.data.id);
+      respuesta.porcentaje.subscribe((data:any)=>{
+        this.procentajeSubida = data;
+        if (data == '100') {
+         respuesta.linkDescarga.subscribe(data=>{
+           this._afs.updateEstadoDeTarea(this.data.idProyecto,this.data.idRol,this.data.data.id,{
+             entrega:data,
+             estado:'b'
+           });
+           this.estado = 'b';
+           this.dialogRef.close();
+         })
+        }
+      })
+    }
     cambioStatus(){
       this._afs.updateEstadoDeTarea(this.data.idProyecto,this.data.idRol,this.data.data.id,{
         estado:this.selectEstado.nativeElement.value
